@@ -12,7 +12,8 @@ ARG ostype=Linux
 ARG pyro_git_url=https://github.com/pyro-ppl/pyro.git
 
 # Configurable settings
-ENV USER_NAME pyromancer
+#ENV USER_NAME pyromancer
+ENV USER_NAME root
 ENV CONDA_DIR /opt/conda
 ENV WORK_DIR /home/${USER_NAME}/workspace
 ENV PATH ${CONDA_DIR}/bin:${PATH}
@@ -27,10 +28,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 # Change to default user
-RUN bash -c 'if [ ${ostype} == Linux ]; then groupadd -r --gid ${gid} ${USER_NAME}; fi && \
-    useradd -r --create-home --shell /bin/bash --uid ${uid} --gid ${gid} ${USER_NAME}' && \
-    mkdir -p ${CONDA_DIR} ${WORK_DIR} && chown ${USER_NAME} ${CONDA_DIR} ${WORK_DIR}
+RUN mkdir -p ${CONDA_DIR} ${WORK_DIR} && chown ${USER_NAME} ${CONDA_DIR} ${WORK_DIR}
 USER ${USER_NAME}
+
 
 # Install conda
 RUN curl -o ~/miniconda.sh -O \

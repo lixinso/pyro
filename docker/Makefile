@@ -5,12 +5,12 @@ BASE_IMG=ubuntu:16.04
 BASE_CUDA_IMG=nvidia/cuda:9.1-cudnn7-devel-ubuntu16.04
 DOCKER_CMD=docker
 DOCKER_GPU_CMD=nvidia-docker
-HOST_WORK_DIR=${HOME}/pyro_docker
+HOST_WORK_DIR=/data/pyro/
 UID=$(shell id -u)
 GID=$(shell id -g)
 OSTYPE=$(shell uname)
-USER=pyromancer
-DOCKER_WORK_DIR=/home/${USER}/workspace/shared
+USER=root
+DOCKER_WORK_DIR=/data/pyro/
 pyro_git_url=https://github.com/pyro-ppl/pyro.git
 
 # Optional args
